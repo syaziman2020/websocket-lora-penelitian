@@ -39,7 +39,7 @@ const byte get_Data_Mode = 1;           //--> Mode to get the reading status of 
 
 //---------------------------------------- Variable declaration for Millis/Timer.
 unsigned long previousMillis_SendMSG_to_GetData = 0;
-const long interval_SendMSG_to_GetData = 1000;
+const long interval_SendMSG_to_GetData = 2000;
 
 unsigned long previousMillis_RestartLORA = 0;
 const long interval_RestartLORA = 1000;
@@ -455,4 +455,5 @@ void loop() {
   //----------------------------------------parse for a packet, and call onReceive with the result:
   onReceive(LoRa.parsePacket());
   //----------------------------------------
+  
 }
