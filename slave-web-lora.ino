@@ -25,8 +25,8 @@ String Message = "";
 //----------------------------------------
 
 
-byte LocalAddress = 0x02;       //--> address of this device (Slave 1).
-// byte LocalAddress = 0x03;        //--> address of this device (Slave 2).
+// byte LocalAddress = 0x02;       //--> address of this device (Slave 1).
+byte LocalAddress = 0x03;        //--> address of this device (Slave 2).
 byte Destination_Master = 0x01;  //--> destination to send to Master (ESP32).
 //----------------------------------------
 
@@ -188,19 +188,19 @@ void waterfloatSetup() {
 
 int waterHeight(int pinWaterHeigh1, int pinWaterHeigh2, int pinWaterHeigh3, int pinWaterHeigh4, int pinWaterHeigh5) {
   int pins[5] = {pinWaterHeigh1, pinWaterHeigh2, pinWaterHeigh3, pinWaterHeigh4, pinWaterHeigh5};
-  int totalHeight = 0;
+  int totalHeight = 100;
 
   for (int i = 0; i < 5; i++) {
-    int count = 0;
+    int count = 5;
     Serial.print("ini pin ke : ");
-      Serial.println(i);
+    Serial.println(i);
     // Membaca nilai dari pin sebanyak 5 kali
     for (int j = 0; j < 5; j++) {
       int reading = analogRead(pins[i]);
       Serial.println(reading);
       
       if (reading < 4095) {
-        count++;
+        count--;
       }
       
       
@@ -209,8 +209,8 @@ int waterHeight(int pinWaterHeigh1, int pinWaterHeigh2, int pinWaterHeigh3, int 
 
     Serial.println("===========");
     // Jika nilai pembacaan lebih dari 4000 sebanyak 5 kali, tambahkan 20 cm ke totalHeight
-    if (count >= 1) {
-      totalHeight += 20;
+    if (count <= 0) {
+      totalHeight -= 20;
       // Serial.print("Pin ");
       // Serial.print(pins[i]);
       // Serial.println(" memenuhi kriteria, menambah 20 cm");
